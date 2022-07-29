@@ -22,12 +22,23 @@ async function worktimeData() {
 	}
 	displayDaily()
 
+	// dodałem funkcję  która pobiera wszystkie przyciski, po czym dodaje tą klase active do klikniętego przycisku 
+	function SelectedBtn(btn){
+		document.querySelectorAll('.timeframe__btn').forEach(button =>{
+			button.classList.remove('active')
+		})
+		btn.classList.add('active')
+
+	}
+
 	dailyBtn.addEventListener('click', e => {
 		for (let i = 0; i < data.length; i++) {
 			currentTasks[i].innerText = data[i].timeframes.daily.current + 'hrs'
 
 			lastTasks[i].innerText = 'Yesterday - ' + data[i].timeframes.daily.previous + 'hrs'
 		}
+		// a tu wywyałanie przy każdym wciścięciu 
+		SelectedBtn(dailyBtn)
 	})
 
 	weeklyBtn.addEventListener('click', e => {
@@ -36,6 +47,8 @@ async function worktimeData() {
 
 			lastTasks[i].innerText = 'Last Week - ' + data[i].timeframes.weekly.previous + 'hrs'
 		}
+		// a tu wywyałanie przy każdym wciścięciu 
+		SelectedBtn(weeklyBtn)
 	})
 
 	monthlyBtn.addEventListener('click', e => {
@@ -44,6 +57,8 @@ async function worktimeData() {
 
 			lastTasks[i].innerText = 'Last Month - ' + data[i].timeframes.monthly.previous + 'hrs'
 		}
+		// a tu wywyałanie przy każdym wciścięciu 
+		SelectedBtn(monthlyBtn)
 	})
 }
 worktimeData()
